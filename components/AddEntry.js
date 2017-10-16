@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Platform, StyleSheet } from 'react-native';
-import { getMetricMetaInfo, timeToString, getDailyReminderValue } from '../utils/helpers';
+import {
+  getMetricMetaInfo,
+  timeToString,
+  getDailyReminderValue,
+  setLocalNotification,
+  clearLocalNotification,
+} from '../utils/helpers';
 import UdaciSlider from './UdaciSlider';
 import UdaciSteppers from './UdaciSteppers';
 import DateHeader from './DateHeader';
@@ -75,6 +81,8 @@ class AddEntry extends Component {
     // Save to datebase
     submitEntry(key, entry);
     // Clean local notification
+    clearLocalNotification()
+      .then(setLocalNotification);
   }
   reset = () => {
     const key = timeToString();
